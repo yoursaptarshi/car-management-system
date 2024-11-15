@@ -1,11 +1,11 @@
 import axios from 'axios'
-const backendURL = 'https://car-management-system-zts5.onrender.com:10000'
+
 export const userLogin = ({UserName,Password})=>async(dispatch)=>{
     try {
         dispatch({type:'Login_Request'});
 
         const  response  = await axios.post(
-            `${backendURL}/api/v1/login`,
+            `/api/v1/login`,
             { email:UserName, password:Password },
             {
               withCredentials: true,
@@ -33,7 +33,7 @@ export const userRegister = ({Name,UserName,Password}) => async(dispatch)=>{
     try {
         dispatch({type:'Register_Request'})
 
-        const {data} = await axios.post(`${backendURL}/api/v1/register`,{name:Name,email:UserName,password:Password},
+        const {data} = await axios.post(`/api/v1/register`,{name:Name,email:UserName,password:Password},
             {
               withCredentials: true, 
             })
@@ -54,7 +54,7 @@ export const userProfile = ()=> async(dispatch)=>{
     try {
         dispatch({type:'User_Fetch_Request'})
 
-        const {data} = await axios.get(`${backendURL}/api/v1/me`,
+        const {data} = await axios.get(`/api/v1/me`,
             {
               withCredentials: true, 
             })
