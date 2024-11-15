@@ -29,7 +29,7 @@ const LoginPage = () => {
   React.useEffect(() => {
     if (isAuthenticated) {
       alert(message || 'Login Successful!');
-      navigate('/products'); // Redirect to Product List Page
+      navigate('/'); 
     }
   }, [isAuthenticated, message, navigate]);
 
