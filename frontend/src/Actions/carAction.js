@@ -1,13 +1,13 @@
 import axios from 'axios';
 
-const backendURL = 'https://car-management-system-zts5.onrender.com:10000';
+
 
 
 export const createCar = (carData) => async (dispatch) => {
   try {
     dispatch({ type: 'Create_Car_Request' });
 
-    const { data } = await axios.post(`${backendURL}/api/v1/createcar`, carData, {
+    const { data } = await axios.post(`/api/v1/createcar`, carData, {
       withCredentials: true,
       headers: {
         'Content-Type': 'multipart/form-data', 
@@ -57,7 +57,7 @@ export const getCarById = (id) => async (dispatch) => {
     dispatch({ type: 'Get_Car_Request' });
 
     const { data } = await axios.post(
-      `${backendURL}/api/v1/cars/detail`,
+      `/api/v1/cars/detail`,
       { id },
       {
         withCredentials: true,
@@ -84,7 +84,7 @@ export const deleteCar = (id) => async (dispatch) => {
   try {
     dispatch({ type: 'Delete_Car_Request' });
 
-    const { data } = await axios.delete(`${backendURL}/api/v1/deletecar`, {
+    const { data } = await axios.delete(`/api/v1/deletecar`, {
       data: { id },
       withCredentials: true,
       headers:{
