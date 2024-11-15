@@ -3,8 +3,10 @@ const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const userRoutes = require("./routes/User")
 const carRoutes = require("./routes/Car")
-
-require("dotenv").config({path:"../backend/config/config.env"})
+const path = require("path");
+if (process.env.NODE_ENV !== "production") {
+  require("dotenv").config({ path: "backend/config/config.env" });
+}
 const fileUpload = require('express-fileupload');
 
 const app = express();
@@ -31,6 +33,10 @@ app.use(fileUpload({
 
 app.use("/api/v1",userRoutes);
 app.use("/api/v1",carRoutes);
+
+app.get("*", (req, res) => {
+  res.sendFile(path.resolve(__dirname, "../frontend/build/index.html"));
+});
 
 module.exports = app;
 
