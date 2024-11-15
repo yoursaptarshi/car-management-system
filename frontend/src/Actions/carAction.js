@@ -32,7 +32,7 @@ export const getAllCars = () => async (dispatch) => {
   try {
     dispatch({ type: 'Get_All_Cars_Request' });
 
-    const { data } = await axios.get(`${backendURL}/api/v1/cars`, {
+    const { data } = await axios.get(`/api/v1/cars`, {
       withCredentials: true,
       headers:{
         'Content-Type':"application/json"
