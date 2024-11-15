@@ -16,7 +16,6 @@ const app = express();
 app.use(cors({
     origin:process.env.frontendURI,
     credentials:true,
-    httpOnly:true,
     path:"/",
     secure:true,
     sameSite:"None"
