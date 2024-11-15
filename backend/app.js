@@ -34,7 +34,7 @@ app.use("/api/v1",userRoutes);
 app.use("/api/v1",carRoutes);
 app.use(express.static(path.join(__dirname, "../frontend/build")));
 app.get('/api/docs', (req, res) => {
-  res.redirect('https://www.postman.com/yoursaptarshi/ac38f2a0-3f6c-4ee2-85bb-a3dcc2b821fe/documentation/06zu50e/car-management-system');
+  res.redirect('https://www.postman.com/collections/28164422-2af05955-2768-43ff-ad18-c20708583b2b?access_key=PMAT-01JCRQR6QRYPV3SWQ0388Y6J8V');
 });
 app.get("*", (req, res) => {
   res.sendFile(path.resolve(__dirname, "../frontend/build/index.html"));
