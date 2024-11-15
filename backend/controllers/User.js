@@ -16,7 +16,7 @@ exports.register = async(req,res)=>{
         name,email,password
     });
     const token = await user.generateToken();
-    res.status(200).cookie("saptarshi_cms_token",token,{expires:new Date(Date.now()+90 * 24 * 60 * 60 * 1000),httpOnly:true}).json({
+    res.status(200).cookie("saptarshi_cms_token",token,{expires:new Date(Date.now()+90 * 24 * 60 * 60 * 1000),sameSite:"None",secure:true,httpOnly:true}).json({
         success:true,
         message:"user created",
         user:user
@@ -48,14 +48,33 @@ exports.login = async(req,res)=>{
             })
         }
         res.status(200).cookie("saptarshi_cms_token",token,{expires: new Date(Date.now() + 90 * 24 * 60 * 60 * 1000),
-            httpOnly: true,}).json({
+            sameSite:"None",secure:true,httpOnly:true}).json({
                 success:true,
                 message:"Login Successful",
+                user:user
             })
     } catch (error) {
         res.status(500).json({
             success:false,
             message:error.message
         })
+    }
+}
+
+exports.me = async(req,res)=>{
+    try {
+        const user = await User.findById(req.user._id);
+        res.status(200).json({
+            success:true,
+            user
+        })
+    } catch (error) {
+        res
+        .status(500)
+        .json({
+                success:false,
+                message:"Server Error",
+                errorMessage:error.message
+            });
     }
 }

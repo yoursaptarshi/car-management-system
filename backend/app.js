@@ -10,10 +10,14 @@ const fileUpload = require('express-fileupload');
 const app = express();
 
 
-//using middlewares
+
 app.use(cors({
     origin:process.env.frontendURI,
-    credentials:true
+    credentials:true,
+    httpOnly:true,
+    path:"/",
+    secure:true,
+    sameSite:"None"
 }))
 app.use(cookieParser());
 app.use(express.json());
@@ -24,7 +28,7 @@ app.use(fileUpload({
     useTempFiles: true,
   }));
 
-//routes
+
 app.use("/api/v1",userRoutes);
 app.use("/api/v1",carRoutes);
 
