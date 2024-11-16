@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch , useSelector} from 'react-redux';
 import { userProfile } from './Actions/userAction.js';
 import SignUpPage from "./Components/SignUpPage/SignUpPage";
 import LoginPage from "./Components/LoginPage/LoginPage.jsx";
@@ -15,13 +15,13 @@ function App() {
   useEffect(() => {
     dispatch(userProfile());
   }, [dispatch]);
-
+const {isAuthenticated} = useSelector((state)=>state.user);
   return (
     <Router>
       <Header />
       <Routes>
       <Route path="/" element={<HomePage />} />
-      <Route path="/create-car" element={<CreateCarPage/>}/>
+      <Route path="/create-car" element={isAuthenticated ? <CreateCarPage/> : <LoginPage/>}/>
         <Route path="/signup" element={<SignUpPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/car/:id" element={<CarDetailsPage/>}/>
